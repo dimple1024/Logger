@@ -35,13 +35,10 @@ public class FileSink implements Sink{
         }
         else {
             // Rename and zip of old file
-            synchronized (this)
-            {
-                File oldFile = new File(this.filePath + "." + zippedFileCount + ".gz");
-                file.renameTo(oldFile);
-                new FileSink(this.filePath, this.maxFileSize);
-
-            }
+            zippedFileCount += 1;
+            File oldFile = new File(this.filePath + "." + zippedFileCount + ".gz");
+            file.renameTo(oldFile);
+            new FileSink(this.filePath, this.maxFileSize);
 
         }
 
